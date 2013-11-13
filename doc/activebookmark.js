@@ -39,4 +39,14 @@
 
   window.addEventListener("scroll", updateSoon);
   window.addEventListener("load", updateSoon);
+  window.addEventListener("hashchange", function() {
+    setTimeout(function() {
+      var hash = document.location.hash, found = null, m;
+      var marks = document.getElementById("nav").getElementsByTagName("a");
+      for (var i = 0; i < marks.length; i++)
+        if ((m = marks[i].href.match(/(#.*)/)) && m[1] == hash) { found = i; break; }
+      if (found != null) for (var i = 0; i < marks.length; i++)
+        marks[i].className = i == found ? "active" : "";
+    }, 300);
+  });
 })();
